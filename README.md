@@ -3,7 +3,7 @@
 ## Existing Benchmarks
 
 ### CANDLE
-- **Repository:** [CANDLE on GitHub](https://github.com/HKUST-KnowComp/CANDLE)
+- **Repository:** [CANDLE on GitHub](https://github.com/gautam0707/CANDLE)
 - **Paper Link:** [CANDLE: Causal ANalysis in DisentangLed rEpresentations](https://arxiv.org/abs/2112.05746)
 - **Description:** Image-based dataset that includes known causal generative factors as well as confounders
 to help study and improve deep generative latent variable models from a causal perspective. The dataset aims to enable both unsupervised and supervised learning methods to study disentangled representation learning. CANDLE includes images with controlled variations in objects, colors, sizes, rotations, lighting, and scenes. Each image's metadata is provided in JSON format, detailing the scene, lighting, object types, colors, sizes, and rotations.
