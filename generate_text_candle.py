@@ -6,21 +6,47 @@ import os
 import json
 import random
 
-SIZE = {
+SIZES = {
 1.5 : 'small',
 2   : 'medium',
 2.5 : 'large',
 }
 
+COLORS = {
+  "red": [
+    "red",
+    "maroon",
+    "cherry red"
+    ],
+  "blue": [
+    "blue",
+    "teal",
+    "navy blue",
+  ],
+  "yellow": [
+    "yellow",
+    "mustard",
+    "canary yellow"
+  ],
+  "purple": [
+    "purple",
+    "violet",
+    "orchid purple"
+  ],
+  "orange": [
+    "orange",
+    "amber",
+    "carrot orange",
+  ]
+}
+
 
 PHRASES = {
-    0: 'A {SIZE} {OBJECT} of "{COLOR}" color is visible.',
-    1: 'A "{COLOR}" {OBJECT} is shown in {SIZE} size.',
-    2: 'A "{COLOR}" colored {OBJECT} which is {SIZE} in size is shown.',
-    3: 'The picture is of a {SIZE} {OBJECT} in "{COLOR}" color.',
-    4: 'There is a {SIZE} "{COLOR}" object in the form of a {OBJECT}.'}
-
-
+    0: 'A {SIZE} {OBJECT} of {COLOR} color is visible.',
+    1: 'A {COLOR} {OBJECT} is shown in {SIZE} size.',
+    2: 'A {COLOR} colored {OBJECT} which is {SIZE} in size is shown.',
+    3: 'The picture is of a {SIZE} {OBJECT} in {COLOR} color.',
+    4: 'There is a {SIZE} {COLOR} object in the form of a {OBJECT}.'}
 
 # Define the folder containing the JSON files
 folder_path = '/home/svishnu6/causal-multimodal-benchmark/datasets/CANDLE'
@@ -48,16 +74,17 @@ for json_file in json_files:
 
         for obj_key, obj_value in objects.items():
             object_type = obj_value.get('object_type')
-            color = obj_value.get('color')
+            init_color = obj_value.get('color')
+            #fill the color stocastically
+            stochastic_color = random.choice(list(COLORS[init_color]))
             size = obj_value.get('size')
             rotation = obj_value.get('rotation')
             bounds = obj_value.get('bounds')
 
             # Select a random phrase
             phrase_template = random.choice(list(PHRASES.values()))
-
             # Format the selected phrase with the object details
-            formatted_phrase = phrase_template.format(SIZE=size, OBJECT=object_type, COLOR=color)
+            formatted_phrase = phrase_template.format(SIZE=SIZES[size], OBJECT=object_type, COLOR=stochastic_color)
 
             # Add the formatted phrase to the list of descriptions
             descriptions.append(formatted_phrase)
